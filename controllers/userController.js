@@ -8,7 +8,6 @@ const validator=require("validator")
 const loginUser=async(req,res)=>{
 const {email,password}=req.body;
 try{
-   
     const user=await userModel.findOne({email});
 
     if(!user)
