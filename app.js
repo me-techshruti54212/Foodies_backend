@@ -22,7 +22,7 @@ app.use("/images",express.static(__dirname + '/uploads'))
 app.use("/api/user",userRouter)
 app.use("/api/cart",cartRouter)
 app.use("/api/order",orderRouter)
-
-app.listen(process.env.PORT,()=>{`Server started at http://localhost:${process.env.PORT}`})
+const port=  process.env.PORT || 7000
+app.listen(port,()=>{`Server started at http://localhost:${port}`})
 
 
