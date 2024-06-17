@@ -6,7 +6,7 @@ const bodyParser=require('body-parser')
 const userRouter=require("./routes/userRoute.js")
 const dotenv=require("dotenv/config")
 const {cartRouter} = require("./routes/cartRoute.js")
-
+const {orderRouter} =require("./routes/orderRoute.js")
 
 const app=express()
 
@@ -21,6 +21,7 @@ app.use("/api/food",foodRouter)
 app.use("/images",express.static(__dirname + '/uploads'))
 app.use("/api/user",userRouter)
 app.use("/api/cart",cartRouter)
+app.use("/api/order",orderRouter)
 
 app.listen(process.env.PORT,()=>{`Server started at http://localhost:${process.env.PORT}`})
 
