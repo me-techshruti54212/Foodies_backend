@@ -5,6 +5,7 @@ const {foodRouter}=require("./routes/foodRoute.js")
 const bodyParser=require('body-parser')
 const userRouter=require("./routes/userRoute.js")
 const dotenv=require("dotenv/config")
+// require('dotenv').config() 
 const {cartRouter} = require("./routes/cartRoute.js")
 const {orderRouter} =require("./routes/orderRoute.js")
 
@@ -23,6 +24,6 @@ app.use("/api/user",userRouter)
 app.use("/api/cart",cartRouter)
 app.use("/api/order",orderRouter)
 const port=  process.env.PORT || 7000
-app.listen(port,()=>{`Server started at http://localhost:${port}`})
+app.listen(port,()=>{console.log(`Server started at http://localhost:${port}`)})
 
 
