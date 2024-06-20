@@ -10,11 +10,9 @@ const storage=multer.diskStorage({
       filename: function (req, file, cb) {
        cb(null,  `${Date.now()} ${file.originalname}`)
       }
-    // filename:(req,file,cb)=>{
-    //     return cb(null,`${Date.now()}${file.originalname}`);
-    // }
+  
 })
-
+// const storage=multer.memoryStorage()
 const upload=multer({storage:storage})
 foodRouter.get("/",(req,res)=>res.send({success:true}))
 foodRouter.post("/add",upload.single("image"),addFood)
