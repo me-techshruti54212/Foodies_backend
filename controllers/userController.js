@@ -3,24 +3,33 @@ const {userModel}=require("../models/userModel")
 const jwt=require("jsonwebtoken")
 const bcrypt=require("bcrypt")
 const validator=require("validator")
+const axios=require("axios")
 
 // Login user
+const SECRET_KEY="6Le7pwQqAAAAAAcac6Lzoubw9v-XK6uEge-qC79Y"
 const loginUser=async(req,res)=>{
-const {email,password}=req.body;
+const {email,password,recaptcha}=req.body;
 try{
     const user=await userModel.findOne({email});
-
+   const response=await axios.post(
+       `https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${recaptcha}`
+    )
+    if(!response.data.success)
+        {
+            return res.json({success:false,message:"Invalid Captcha"});
+        }
+    
     if(!user)
         {
            return res.json({success:false,message:"User doesn't exists"}) 
         }
-        const isMatch=await bcrypt.compare(password,user.password);
-        if(!isMatch)
+     const isMatch=await bcrypt.compare(password,user.password);
+    if(!isMatch)
             {
                 return res.json({success:false,message:"Invalid Password"})
             }
-            const token=createToken(user._id);
-            res.json({success:true,token})
+    const token=createToken(user._id);
+    res.json({success:true,token})
 }
 catch(err)
 {
@@ -36,10 +45,20 @@ const createToken=(id)=>{
 
 // Register User
 const registerUser=async(req,res)=>{
-const {name,email,password}=req.body;
+const {name,email,password,recaptcha}=req.body;
 console.log(name,email,password)
 try{
 const userexists=await userModel.findOne({email});
+const response=await axios.post(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${recaptcha}`
+ )
+ if(!response.data.success)
+     {
+        console.log(response.data.success)
+         return res.json({success:false,message:"Invalid Captcha"});
+     }
+
+
 if(userexists)
     {
         return res.json({success:false,message:"User already exists"})
@@ -70,6 +89,7 @@ if(userexists)
 catch(err)
 {
 console.log(err);
+res.json({message:"Some error occured",success:"false"})
 }
 }
 
