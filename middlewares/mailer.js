@@ -20,9 +20,9 @@ const sendMail = async(userId, token,email) =>{
     // <p>Otp is valid for 2 minutes. So, make sure to enter the otp within time or you will need to make a new request</p>
    // <h1><b style="margin-bottom:20px; color:#5C3F76; font-size=30px;">${otp}</b></h1>
     const transporter = nodemailer.createTransport({
-        host:"smtp.gmail.com",
+        // host:"smtp.gmail.com",
         service:"gmail",
-        port:535,
+        // port:535,
         auth:{
             user:process.env.MAIL,
             pass:process.env.PASS
