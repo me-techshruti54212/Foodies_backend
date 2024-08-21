@@ -1,5 +1,5 @@
 const {userModel}=require("../models/userModel")
-
+const {foodModel}=require("../models/foodModel")
 const addToCart=async(req,res)=>{
     // console.log(req.body.userId)
 try{
@@ -49,8 +49,15 @@ const getCart=async(req,res)=>{
     try{
     let userData=await userModel.findOne({_id:req.body.userId})
     let cartData=await userData.cartData;
-    res.json({success:true,cartData:cartData})
+    let foodData=[];
+    for (const id in cartData) {
+       let fooditem=await foodModel.findOne({_id:id});
+    //    console.log(fooditem)
+        foodData.push({_id:fooditem._id,name:fooditem.name,price:fooditem.price,image:fooditem.image,qty:cartData[id]});
     }
+    res.json({success:true,cartData:foodData})
+    
+}
     catch(err){
         console.log(err)
         res.json({success:false,message:"Error"})
