@@ -10,9 +10,9 @@ const sendMail = async(userId, token,email) =>{
         <div class="otpDiv" style=" width:80%; margin:auto; padding:10px">
             <h2 class="otpHead" style="color:#5C3F76;">Team Foodies</h2>
             <h3 style="margin-bottom:10px;">Thankyou for using Foodies</h3>
-            <p style="margin-bottom:20px;">A password reset event has been triggered. To complete the password reset process, click on the link below:</p>
+            <p style="margin-bottom:20px;">A password reset event has been triggered. To complete the password reset process, click on the button below:</p>
          
-             <p>http://localhost:5173/reset-password/${userId}/${token}</p>
+             <a href="https://me-techshruti54212.github.io/Foodies_frontend/reset-password/${userId}/${token}"><button style="background-color: #4CAF50;color:white; padding: 15px 32px; text-decoration: none;cursor: pointer;border-radius: 12px; ">Reset Password</button></a>
             
         </div>
         `,
