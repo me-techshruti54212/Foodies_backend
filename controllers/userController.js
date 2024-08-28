@@ -105,6 +105,7 @@ const forgotPasswordUser = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     console.log(token);
    mailer.sendMail(user._id,token,email)
+   res.json({success:true,message:"Mail sent for password reset"})
   } catch (err) {
     console.log(err);
   }
