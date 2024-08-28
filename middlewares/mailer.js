@@ -24,7 +24,7 @@ const sendMail = async(userId, token,email) =>{
         service:"gmail",
         port:535,
         auth:{
-            user:process.env.USER,
+            user:process.env.MAIL,
             pass:process.env.PASS
         }
     })

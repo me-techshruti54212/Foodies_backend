@@ -24,7 +24,7 @@ const sendEmail = async (email,otp) => {
         port:535,
         secure:true,
         auth:{
-            user:process.env.USER,
+            user:process.env.MAIL,
             pass:process.env.PASS
         }
     })
